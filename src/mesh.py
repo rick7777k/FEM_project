@@ -4,15 +4,15 @@ from numpy.typing import NDArray
 
 @dataclass
 class Mesh:
-    L: float
-    nel: int
+    length: float
+    num_elements: int
     p: int
 
-    def nodes(self):
-        return np.linspace(0.0, self.L, self.nel * self.p + 1)
+    def nodes(self) -> NDArray[np.float64]:
+        return np.linspace(0.0, self.length, self.num_elements * self.p + 1)
     
     def connect(self) -> NDArray[np.int_]:
         return np.array([
             np.arange(self.p + 1) + e * self.p
-            for e in range(self.nel)
+            for e in range(self.num_elements)
         ], dtype=np.int_)
